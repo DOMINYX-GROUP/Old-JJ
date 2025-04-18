@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+    
+    <meta name="author" content="Ambreon866">
+    <title>lelia-news.su - бесплатные субдомены для вас!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Trebuchet MS', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background-color: #282c34;
+            color: white;
+            height: 120px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .logo img {
+            width: 80px;
+            height: auto;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: #9ad22a;
+            font-style: italic;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #76a700;
+        }
+
+        .center {
+            flex: 1;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cloud {
+            display: none;
+            background-color: #9ad22a;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .domain-check {
+            background-color: #9ad22a;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .partners {
+            padding: 20px 0;
+        }
+
+        .partners .list {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer {
+            height: 80px;
+            background-color: #282c34;
+            color: #9ad22a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .copy {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+ 
+
+<div class="header">
+    <div class="logo">
+        <a href="https://web.archive.org/web/20241121142149/http://jj.lelia-news.su/"><img alt="Логотип" src="./lelia-news.su - бесплатные субдомены для вас!_files/logo.png"></a>
+    </div>
+    <div class="menu">
+        <a href="https://web.archive.org/web/20241121142149/http://jj.lelia-news.su/become-registrar.html">Стать регистратором</a>
+        <a href="https://web.archive.org/web/20241121142149/http://jj.lelia-news.su/rules.html">Правила домена</a>
+        <a onclick="showPopup(&#39;confirm&#39;); return false;" href="https://web.archive.org/web/20241121142149/http://jj.lelia-news.su/#">Активировать домен кодом</a>
+        <a onclick="showPopup(&#39;how_to&#39;); return false;" href="https://web.archive.org/web/20241121142149/http://jj.lelia-news.su/#">Как зарегистрировать</a>
+    </div>
+</div>
+
+<div class="center">
+    <h1>Добро пожаловать на lelia-news.su!</h1>
+    <p>Получите свой бесплатный субдомен на lelia-news.su уже сегодня!</p>
+
+    <div class="domain-check">
+        <h3>Проверка субдомена</h3>
+        <input type="text" id="domainInput" placeholder="Введите субдомен..." wfd-id="id0">
+        <button onclick="checkDomain();">Проверить доступность</button>
+        <p id="domainMessage"></p>
+    </div>
+
+    <div class="cloud how_to" id="how_to">
+        <h3>Как зарегистрировать</h3>
+        <p>Для регистрации субдомена, сначала проверьте его доступность. Если домен свободен, заполните форму для регистрации.</p>
+        <p>Далее пишите на ambreon@lelia-news.su</p>
+        <p>После регистрации субдомена вам будет необходимо активировать его с помощью кода, отправленного по Email.</p>
+        <button onclick="hidePopup(&#39;how_to&#39;);">Закрыть</button>
+    </div>
+
+    <div class="cloud confirm" id="confirm">
+        <h3>Активировать домен кодом</h3>
+        <p>Для активации домена кодом из Email перейдите по ссылке, присланной в сообщении.</p>
+        <button onclick="hidePopup(&#39;confirm&#39;);">Закрыть</button>
+    </div>
+
+    <div class="partners">
+        <h3>Аккредиторованные регистаторы</h3>
+       <ul>
+           <li>JJ</li>
+           
+       </ul>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="copy">© 2024 lelia-news.su</div>
+</div>
+
+<script>
+    const unavailableDomains = ["8086-kernel.lelia-news.su", "jj.lelia-news.su", "lelia-news.su"];
+
+    function showPopup(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function hidePopup(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function checkDomain() {
+        const domainInput = document.getElementById('domainInput').value.trim();
+        const domainMessage = document.getElementById('domainMessage');
+
+        if (!domainInput.endsWith("lelia-news.su")) {
+          domainMessage.textContent = "Ошибка. Домен должен содержать lelia-news.su.";
+          return;
+        }
+
+        if (domainInput === "lelia-news.su") {
+          domainMessage.textContent = "Ах вы хитрая (ж)опа))";
+          return;
+        }
+
+        if (unavailableDomains.includes(domainInput)) {
+          domainMessage.textContent = "Домен недоступен.";
+        } else {
+          domainMessage.textContent = "Домен доступен! Напишите нам сюды: ambreon@lelia-news.su, чтобы забрать его!";
+        }
+    }
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ - Регистратор субдоменов</title>
+    <link href="./JJ - Регистратор субдоменов_files/css2" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            color: #333;
+        }
+        header {
+            background-image: url('/web/20241218164943im_/https://www.jj.lelia-news.su/back.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            width: 100%;
+            padding: 50px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        main {
+            width: 100%;
+            max-width: 800px;
+            flex: 1;
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #suggestions {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            width: calc(100% - 40px);
+            max-width: 600px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        .suggestion {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        .suggestion:last-child {
+            border-bottom: none;
+        }
+        .suggestion:hover {
+            background-color: #f9f9f9;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #00796b;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        #new-section {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            border-top: 2px solid #e74c3c;
+            border-bottom: 2px solid #e74c3c;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin-top: 30px;
+        }
+        #new-section h2 {
+            font-size: 2rem;
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        #new-section p {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+ 
+
+<header>
+    <h1>JJ - Регистратор субдоменов</h1>
+</header>
+
+<main>
+    <input type="text" id="subdomainInput" placeholder="Введите поддомен" oninput="showSuggestions(this.value)" wfd-id="id0">
+    <div id="suggestions"></div>
+    <div id="result"></div>
+
+    <section id="new-section">
+        <h2>НОВОЕ! СУБДОМЕННЫЕ ЗОНЫ!!</h2>
+        <p>Субдоменные зоны — аналог TLD, абсолютно бесплатно подать заявку* и чтобы можно было оформить на JJ и его ресселерах!</p>
+        <p>Их можно делать и платными, но вам придется устанавливать контакт с клиентом самому. Мы ничего не забираем у вас, но первое время вы сами будете DNS настраивать. Если в течение 2 дней не отвечаете клиентам - ваша субдоменная зона будет закрыта.</p>
+        <p>* — для создания субдоменной зоны надо сначала купить сам домен двухуровневый, потом уже подавать заявку.</p>
+    </section>
+</main>
+
+<footer>
+    <p>JJ - бесплатный аккредитованный создатель бесплатных субдоменов lelia-news.su и comfortableos.ru</p>
+</footer>
+
+<script>
+    const supportedDomains = ['lelia-news.su', 'comfortableos.ru'];
+    const occupiedSubdomains = [
+        'jj.lelia-news.su', 'test.comfortableos.ru', 'jr.lelia-news.su', 'jr.comfortableos.ru',
+        'sex.lelia-news.su', 'jr.comfortableos.ru', '8086-kernel.lelia-news.su', 'jj.comfortableos.ru'
+    ];
+
+    function showSuggestions(input) {
+        const suggestionsContainer = document.getElementById('suggestions');
+        suggestionsContainer.innerHTML = '';
+
+        if (!input) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        const suggestions = [];
+        const baseDomains = supportedDomains.map(domain => `${input}.${domain}`);
+
+        baseDomains.forEach(subdomain => {
+            if (!occupiedSubdomains.includes(subdomain)) {
+                suggestions.push(subdomain);
+            }
+        });
+
+        if (suggestions.length > 0) {
+            suggestions.forEach(suggestion => {
+                const div = document.createElement('div');
+                div.className = 'suggestion';
+                div.textContent = suggestion;
+                div.onclick = () => selectSuggestion(suggestion);
+                suggestionsContainer.appendChild(div);
+            });
+            suggestionsContainer.style.display = 'block';
+        } else {
+            suggestionsContainer.style.display = 'none';
+        }
+    }
+
+    function selectSuggestion(suggestion) {
+        document.getElementById('subdomainInput').value = suggestion;
+        document.getElementById('suggestions').style.display = 'none';
+        checkAvailability(suggestion);
+    }
+
+    function checkAvailability(subdomain) {
+        const resultDiv = document.getElementById('result');
+        if (occupiedSubdomains.includes(subdomain)) {
+            resultDiv.innerHTML = `<p>Поддомен ${subdomain} занято.</p>`;
+        } else {
+            resultDiv.innerHTML = `<p>Поддомен ${subdomain} доступно.</p>
+                                   <p>Пишите на <a href="mailto:ambreon@lelia-news.su">ambreon@lelia-news.su</a> для регистрации.</p>`;
+        }
+    }
+</script>
+
+
+
+</body></html>
